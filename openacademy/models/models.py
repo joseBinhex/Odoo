@@ -17,7 +17,7 @@ class course(models.Model):
     name_responsible = fields.Char(related='responsible.name', string='Responsible name')
     sessions = fields.One2many('openacademy.sessions', 'course_name', string='Sessions')
     contenido = fields.Html("Content")
-    image = fields.Binary(string='Image')
+    image = fields.Many2many(comodel_name='openacademy.gallery', relation='course_gallery_rel', column1='course_id', column2='gallery_id', string='Gallery')
     attachment_ids = fields.Many2many(comodel_name='ir.attachment', string='Attachments')
 
     num_attachments = fields.Integer(compute='_get_num_attachments', string='Number of attachments')

@@ -11,23 +11,21 @@
           <field name="title"/>
           <field name="description"/>
           <field name="responsible"/>
-          
         </tree>
       </field>
     </record>
 
-    <!-- FORMULARIO -->
+    <!-- FORMULARIO CURSO -->
     <record model="ir.ui.view" id="course_form">
       <field name="name">Courses list</field>
       <field name="model">openacademy.course</field>
       <field name="arch" type="xml">
         <form string="Course Form">
-
           <group colspan="2" col="2">
             <field name="name" style="font-size:13pt"> Name</field>
             <field name="title" style="font-size:13pt"> Title</field>
-            <field name="image" widget="image" class="oe_avatar"/>
-            <field name="attachment_ids" widget="many2many_binary"/>
+            <field name="image" widget="many2many_tags"/>
+            <field name="attachment_ids" widget="many2many_tags"/>
           </group>
 
           <notebook colspan="4">
@@ -318,10 +316,6 @@
         </kanban>
       </field>
     </record>
-
-
-
-
 
   </data>
 </odoo>

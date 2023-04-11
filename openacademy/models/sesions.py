@@ -4,7 +4,7 @@ from odoo.exceptions import ValidationError
 class sessions(models.Model):
     _name = 'openacademy.sessions'
     _description = 'Esto es una descripcion!'
-    _inherit = ['portal.mixin', 'mail.thread.cc', 'mail.activity.mixin', 'rating.mixin']
+    _inherit = ['portal.mixin', 'mail.thread.cc', 'mail.activity.mixin']
     _rec_name = "name"
 
     name = fields.Char(required=True)

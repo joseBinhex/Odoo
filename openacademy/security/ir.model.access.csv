@@ -5,3 +5,4 @@ access_all_wizards,Access_to_coursesB,openacademy.model_openacademy_attendses,ba
 access_all_courses_m,Access_to_coursesC,openacademy.model_openacademy_course,openacademy.openacademy_manager,1,1,1,1
 access_all_sessions_m,Access_to_coursesD,openacademy.model_openacademy_sessions,openacademy.openacademy_manager,1,1,1,1
 access_all_wizards_m,Access_to_coursesE,openacademy.model_openacademy_attendses,openacademy.openacademy_manager,1,1,1,1
+access_all_gallery,Access_to_coursesE,openacademy.model_openacademy_gallery,openacademy.openacademy_manager,1,1,1,1

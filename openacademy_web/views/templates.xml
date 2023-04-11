@@ -1,0 +1,523 @@
+<odoo>
+
+<!-- Products Search Bar input-group template -->
+    <template id="courses_search_box" inherit_id="website.website_search_box">
+        <xpath expr="//input[@name='search']" position="attributes">
+            <attribute name="data-limit">0</attribute>
+            <attribute name="data-display-title">true</attribute>
+            <attribute name="data-display-name">true</attribute>
+        </xpath>
+        <xpath expr="//div[@role='search']" position="replace">
+            <form t-att-action="'/courses'" method="get" t-att-data-snippet="_snippet">
+                <t>$0</t>
+                <input name="order" type="hidden" class="o_wsale_search_order_by" value=""/>
+                <t t-raw="0"/>
+            </form>
+        </xpath>
+    </template>
+
+    <template id="search_b" name="Search Box">
+        <t t-call="openacademy_web.courses_search_box">
+            <t t-set="action" t-attf-value="keep('/courses', search=0)"/>
+        </t>
+    </template>
+
+    <!--  SORT CUSTOM     -->
+    <template id="sort" customize_show="True" name="Show Sort by">
+        <t t-set="name_asc">Name: A to Z</t>
+        <t t-set="website_course_sortable" t-value="[
+            (name_asc, 'name'),
+        ]"/>
+        <t t-set="website_course_current" t-value="[sort for sort in website_course_sortable if sort[1]==request.params.get('order', '')]"/>
+        <div class="dropdown mt-2 ml-md-2 dropdown_sorty_by">
+            <a role="button" href="#" class="dropdown-toggle btn btn-secondary" data-toggle="dropdown">
+                <span class="d-none d-lg-inline">
+                    <t t-if='len(website_course_current)'>
+                        Sorting by : <t t-raw='website_course_current[0][0]'/>
+                    </t>
+                    <t t-else='1'>
+                        Sort by
+                    </t>
+                </span>
+                <i class="fa fa-sort-amount-asc d-lg-none"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                <t t-foreach="website_course_sortable" t-as="sortby">
+                    <a role="menuitem" rel="noindex,nofollow" t-att-href="keep('/courses', order=sortby[1])" class="dropdown-item">
+                        <span t-raw="sortby[0]"/>
+                    </a>
+                </t>
+            </div>
+        </div>
+    </template>
+
+    <template id="sort_uno" customize_show="True" name="Filter By">
+        <t t-set="order_sess">Available Sessions On Courses</t>
+        <t t-set="website_courses_sortable" t-value="[
+            (order_sess, 'sessions')
+        ]"/>
+        <t t-set="website_courses_current" t-value="[sort_uno for sort_uno in website_courses_sortable if sort_uno[1]==request.params.get('filt', '')]"/>
+        <div class="dropdown mt-2 ml-md-2 dropdown_sorty_by">
+            <a role="button" href="#" class="dropdown-toggle btn btn-secondary" data-toggle="dropdown">
+                <span class="d-none d-lg-inline">
+                    <t t-if='len(website_courses_current)'>
+                        Filter by : <t t-raw='website_courses_current[0][0]'/>
+                    </t>
+                    <t t-else='1'>
+                        Filter by
+                    </t> 
+                </span>
+                <i class="fa fa-sort-amount-asc d-lg-none"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                <t t-foreach="website_courses_sortable" t-as="sortby">
+                    <a role="menuitem" rel="noindex,nofollow" t-att-href="keep('/courses', filt=sortby[1])" class="dropdown-item">
+                        <span t-raw="sortby[0]"/>
+                    </a>
+                </t>
+            </div>
+        </div>
+    </template>
+
+    <!-- TEMPLATE PRINCIPAL DE CURSOS -->
+    <template id="data_template" name="Course Details">   
+        <t t-call="website.layout">
+            <div class="oe_structure">       
+                <div class="container">       
+                <br/>          
+                <div class="row">
+                    <div class="col-md-4">
+                        <t t-call="openacademy_web.search_b"/>
+                    </div>
+                    <div class="col-md-4">
+                        <t t-call="website.pager"/>    
+                    </div>
+                    <div class="col-md-4">
+                        <t t-call="openacademy_web.sort"/> 
+                        <t t-call="openacademy_web.sort_uno"/>
+                    </div>    
+                </div>
+                <center>   
+                <h3>Course Details</h3>    
+                </center>       
+                <br/>        
+                    <table class="table-striped table">  
+                        <thead style="font-size: 23px;">            
+                            <tr>                   
+                                <h6>             
+                                    <b>              
+                                        <th>Name Course</th>            
+                                        <th>Title</th>                          
+                                        <th>Responsible</th>                           
+                                        <th><b>Description</b></th>                      
+                                    </b>              
+                                </h6>       
+                            </tr>         
+                        </thead>         
+                            <tbody>                
+                                <t t-foreach="courses" t-as="course">
+                                    <tr>  
+                                        <td><a t-attf-href="/course/data/{{ course.id }}" t-esc="course.name"/></td>
+                                        <td><t t-esc="course.title"/></td>
+                                        <td><t t-esc="course.name_responsible"/></td>
+                                        <td><t t-esc="course.description"/></td>
+                                    </tr>
+                                </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- TEMPLATE MODIFICADA DE MOSTRAR LA INFO DE LOS CURSOS -->
+    <template id="plus_course" name="Courses Info" customize_show="True">  
+        <t t-call="website.layout">
+            <div class="oe_structure oe_empty">  
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a t-attf-href="/courses">Courses</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <span t-esc="courses.name"/>
+                        </li>
+                    </ol>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h2 class="card-title"><t t-esc="courses.name"/></h2>
+                                    <h3 class="card-subtitle mb-3"><t t-esc="courses.title"/></h3>
+                                    <p class="card-text"><t t-esc="courses.description"/></p>
+                                    <a t-attf-href="/course/{{ courses.id }}" class="btn btn-primary">View all sessiones</a>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">Course content</h4>
+                                    <div class="card-text"><t t-raw="courses.contenido"/></div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">Have questions?</h4>
+                                        <!-- <div class="oe_structure oe_empty" data-editor-message="ARRASTRE BLOQUES AQUÍ">
+                                            <section class="s_website_form pt16 pb16 o_colored_level" data-vcss="001" data-snippet="s_website_form" data-name="Form" style="">
+                                                <div class="container">
+                                                    <form action="/website_form/" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-success-mode="redirect" data-success-page="/contactus-thank-you" data-model_name="crm.lead">
+                                                        <div class="s_website_form_rows row s_col_no_bgcolor">
+                                                        <div class="form-group s_website_form_field col-12  s_website_form_required  " data-type="char" data-name="Field">
+                                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="o1marztjnyn3i">
+                                                                <span class="s_website_form_label_content">Your Name</span>
+                                                                <span class="s_website_form_mark"> *</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input type="text" class="form-control s_website_form_input" name="contact_name" required="1" id="o1marztjnyn3i"/>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group s_website_form_field col-12  s_website_form_required  " data-type="email" data-name="Field">
+                                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="ognm6p726um">
+                                                                <span class="s_website_form_label_content">Your Email</span>
+                                                                <span class="s_website_form_mark"> *</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input type="email" class="form-control s_website_form_input" name="email_from" required="1" id="ognm6p726um"/>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group s_website_form_field col-12  s_website_form_model_required  " data-type="char" data-name="Field">
+                                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="oml1rc1o0b8">
+                                                                <span class="s_website_form_label_content">Subject</span>
+                                                                <span class="s_website_form_mark"> *</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input type="text" class="form-control s_website_form_input" name="name" required="true" id="oml1rc1o0b8"/>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group s_website_form_field col-12  s_website_form_required  " data-type="text" data-name="Field">
+                                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="ohbso3v28hz8">
+                                                                <span class="s_website_form_label_content">Your Question</span>
+                                                                <span class="s_website_form_mark"> *</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <textarea class="form-control s_website_form_input" name="description" required="1" id="ohbso3v28hz8" rows="3"/>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group s_website_form_field col-12    " data-type="boolean" data-name="Field">
+                                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class=" col-sm-auto s_website_form_label " style="width: 200px" for="oxmyg0puyee">
+                                                                <span class="s_website_form_label_content">Send emails</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <input type="checkbox" value="Yes" class="s_website_form_input" name="active" id="oxmyg0puyee"/>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group s_website_form_field col-12   s_website_form_field_hidden " data-type="many2one" data-name="Field">
+                                                            <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                            <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="oqw6d51fossh">
+                                                                <span class="s_website_form_label_content">Course</span>
+                                                            </label>
+                                                            <div class="col-sm">
+                                                                <select class="form-control s_website_form_input" name="course_id" id="oqw6d51fossh">
+                                                                <option t-attf-value="{{ courses.id }}">
+                                                                    <t t-esc="courses.name"/>
+                                                                </option>
+                                                                </select>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-12 s_website_form_submit" data-name="Submit Button">
+                                                            <div style="width: 200px;" class="s_website_form_label"/>
+                                                            <a href="#" role="button" class="btn btn-primary btn-lg s_website_form_send o_default_snippet_text">Enviar</a>
+                                                            <span id="s_website_form_result"/>
+                                                        </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </section>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">Responsible</h4>
+                                    <p class="card-text"><t t-esc="courses.name_responsible"/></p>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">Gallery</h4>
+                                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    <img class="d-block mx-auto" t-att-src="'data:image/png;base64,%s' % images[0].image.decode('utf-8')" style="max-width: 50%; height:auto;"/>
+                                                </div>
+                                                <t t-foreach="images[1:]" t-as="image">
+                                                    <div class="carousel-item">
+                                                        <img class="d-block mx-auto" t-att-src="'data:image/png;base64,%s' % image.image.decode('utf-8')" style="max-width: 50%; height:auto;"/>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                                ⬅️
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                                ➡️
+                                            </a>
+                                        </div>
+                                    <div class="row">
+                                        <t t-foreach="images" t-as="image">
+                                        <div class="col-4 mb-3">
+                                            <div class="card">
+                                                <img class="card-img-top" t-att-src="'data:image/png;base64,%s' % image.image.decode('utf-8')" alt="Gallery image"/>
+                                            </div>
+                                        </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4 class="card-title">Documents</h4>
+                                    <a t-attf-href="/course/{{ courses.id }}/attachments" class="btn btn-primary" role="button">
+                                        📎 View attachments (<t t-esc="courses.num_attachments"/>)
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- TEMPLATE ATTACHMENTS -->
+    <template id="all_attachmentos" name="Attachments">
+        <t t-call="website.layout">
+            <div class="oe_structure">       
+                <div class="container">
+                    <div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/courses">Courses</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a t-attf-href="/course/data/{{ courses.id }}"><t t-esc="courses.name"/></a>
+                            </li>     
+                            <li class="breadcrumb-item active">
+                                Attachments
+                            </li>
+                        </ol>
+                    </div> 
+                    <t t-foreach="courses" t-as="course">
+                        <t t-name="openacademy.course">
+                            <form>
+                                <field name="attachment_ids" widget="many2many_binary">
+                                    <table>
+                                        <thead style="font-size: 20px;">            
+                                            <tr>                   
+                                                <h6>             
+                                                    <b>              
+                                                        <th>Name Attachment</th>                           
+                                                    </b>              
+                                                </h6>       
+                                            </tr>         
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="course.attachment_ids" t-as="attachment">
+                                            <tr>
+                                                <td><a t-if="attachment.id" t-attf-href="/web/content/{{ attachment.id }}?download=true" t-attf-download="{{ attachment.name }}"><i class="fa fa-download"/> <t t-esc="attachment.name"/></a>
+                                                </td>
+                                            </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>    
+                                </field>       
+                            </form>
+                        </t>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!--  TEMPLATE SESSIONS INFO -->
+    <template id="course_sessions" name="Course Sessions">
+        <t t-call="website.layout">
+            <div class="container">
+                <div>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/courses">Courses</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a t-attf-href="/course/data/{{ course_id.id }}"><t t-esc="course_id.name"/></a>
+                        </li>     
+                        <li class="breadcrumb-item active">
+                            Sessions
+                        </li>
+                    </ol>
+                </div>   
+                <h1><t t-esc="course"/></h1>
+                <table class="table table-striped">
+                    <thead>
+                    <t t-call="website.pager"/>
+                        <tr>
+                            <th>Session Name</th>
+                            <th>Instructor</th>
+                            <th>Start Date</th>
+                            <th>Finish Date</th>
+                            <th>Duration (hours)</th>
+                            <th>Localization</th>
+                            <th>Attendees</th>
+                            <th>Available Seats</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-if="sessions">
+                            <t t-foreach="sessions" t-as="session">
+                                <tr>
+                                    <td><t t-esc="session.name"/></td>
+                                    <td><t t-esc="session.instructor.name"/></td>
+                                    <td><t t-esc="session.date_start"/></td>
+                                    <td><t t-esc="session.finish_date"/></td>
+                                    <td><t t-esc="session.duration"/></td>
+                                    <td><t t-esc="session.localization"/></td>
+                                    <td>
+                                    <!--  CONTEO DE ASISTENTES -->
+                                        <t t-set="attendees_count" t-value="0"/>
+                                        <t t-foreach="session.attendees" t-as="attendee">
+                                            <t t-set="attendees_count" t-value="attendees_count + 1"/></t>
+                                        <t t-esc="attendees_count"/>
+                                    </td>
+                                    <td><t t-esc="session.max_seats - session.attendees_count"/></td>
+                                    <t t-if="userid not in [attendee.id for attendee in session.attendees]">
+                                        <td>
+                                            <a t-attf-href="/add_user_to_session/{{ session.id }}"><button class="btn btn-primary">Asist</button></a>
+                                        </td>
+                                    </t>
+                                    <t t-else="">
+                                        <td>
+                                            <a t-attf-href="/delete_user_to_session/{{ session.id }}">
+                                                <button class="btn btn-primary" style="background-color: red !important;">Un-Asist</button>
+                                            </a>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <tr>
+                                <td colspan="8">No sessions found</td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <!-- MENSAJE DE UNIDO A SESIÓN CORRECTAMENTE -->
+    <template id="register_to_session_success" name="Register to Session Success">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p><t t-esc="message"/></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <p>
+                            <a href="/courses">Go back!</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- MENSAJE DE BORRADO -->
+    <template id="delete_to_session_success" name="Delete to Session Success">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p><t t-esc="message"/></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <p>
+                            <a href="/courses">Go back!</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!--  TEMPLATE DE LA GALERIA -->
+    <template id="course_gallery_template">
+        <t t-call="website.layout">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/courses">Courses</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a t-attf-href="/course/data/{{ course.id }}"><t t-esc="course.name"/></a>
+                    </li>     
+                    <li class="breadcrumb-item active">
+                        Gallery
+                    </li>
+                </ol>
+                <h1>Gallery for <t t-esc="course.name"/></h1>
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block mx-auto" t-att-src="'data:image/png;base64,%s' % images[0].image.decode('utf-8')" style="max-width: 50%; height:auto;"/>
+                        </div>
+                        <t t-foreach="images[1:]" t-as="image">
+                            <div class="carousel-item">
+                                <img class="d-block mx-auto" t-att-src="'data:image/png;base64,%s' % image.image.decode('utf-8')" style="max-width: 50%; height:auto;"/>
+                            </div>
+                        </t>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        ⬅️
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        ➡️
+                    </a>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="my_module_course_gallery">
+        <t t-call="openacademy_web.course_gallery_template"/>
+    </template>
+
+
+
+
+</odoo>
