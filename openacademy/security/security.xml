@@ -11,7 +11,7 @@
         <field name="groups" eval="[(4, ref('openacademy.openacademy_manager'))]"></field>
         <field name="perm_read" eval="0"></field>
         <field name="perm_write" eval="1"></field>
-        <field name="perm_create" eval="0"></field>
+        <field name="perm_create" eval="1"></field>
         <field name="perm_unlink" eval="1"></field>
         <field name="domain_force"> ['|', ('responsible','=',False), ('responsible','=',user.id)]
         </field>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from . import models
-from . import partner_model
-from . import create_attend
-from . import sesions
-from . import gallery
+from . import openadacemy_courses
+from . import openacademy_partner
+from . import openacademy_attend
+from . import openacademy_sesions
+from . import openacademy_gallery

@@ -167,33 +167,24 @@ class OpenAcademyController(http.Controller):
         message = "You have been deleted to the session successfully!"
         return request.render('openacademy_web.delete_to_session_success', {'message': message})
 
-    # RUTA DE DESCARGA DE ARCHIVOS
-    @http.route(['/web/content/<int:id>'], type='http', auth='public', website=True)
-    def download_attachment(self, id):
-        attachment = request.env['ir.attachment'].sudo().search([('id','=', id)])
-        if attachment.exists():
-            content_base64 = attachment.datas and attachment.datas.decode('base64') or ''
-            content = base64.b64decode(content_base64)
-            headers = [
-                ('Content-Type', 'application/octet-stream'),
-                ('Content-Disposition', content_disposition(attachment.name))
-            ]
-            response = request.make_response(content, headers=headers)
-            return response
-        else:
-            return "Attachment not found"
-
     # RUTA DE TODOS LOS ARCHIVOS
     @http.route('/course/<int:course>/attachments', type='http', auth='public', website=True)
     def all_attachments(self, course):
         course = request.env['openacademy.course'].sudo().search([('id','=', course)])
         return request.render('openacademy_web.all_attachmentos', {'courses': course})
-
-    # RUTA DE LAS IMAGENES POR CURSO
-    @http.route('/course_gallery/<int:course_id>', type='http', auth='public', website=True)
-    def course_gallery(self, course_id, **kwargs):
-        course = request.env['openacademy.course'].sudo().browse(course_id)
-        return http.request.render('openacademy_web.my_module_course_gallery', {
-            'course': course,
-            'images': course.image,
-        })
+    
+    # # RUTA DE DESCARGA DE ARCHIVOS
+    # @http.route(['/web/content/<int:id>'], type='http', auth='public', website=True)
+    # def download_attachment(self, id):
+    #     attachment = request.env['ir.attachment'].sudo().search([('id','=', id)])
+    #     if attachment.exists():
+    #         content_base64 = attachment.datas and attachment.datas.decode() or ''
+    #         content = base64.b64decode(content_base64)
+    #         headers = [
+    #             ('Content-Type', 'application/octet-stream'),
+    #             ('Content-Disposition', content_disposition(attachment.name))
+    #         ]
+    #         response = request.make_response(content, headers=headers)
+    #         return response
+    #     else:
+    #         return "Attachment not found"

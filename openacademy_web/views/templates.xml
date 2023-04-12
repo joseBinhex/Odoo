@@ -109,37 +109,39 @@
                 <h3>Course Details</h3>    
                 </center>       
                 <br/>        
-                    <table class="table-striped table">  
-                        <thead style="font-size: 23px;">            
-                            <tr>                   
-                                <h6>             
-                                    <b>              
-                                        <th>Name Course</th>            
-                                        <th>Title</th>                          
-                                        <th>Responsible</th>                           
-                                        <th><b>Description</b></th>                      
-                                    </b>              
-                                </h6>       
-                            </tr>         
-                        </thead>         
-                            <tbody>                
-                                <t t-foreach="courses" t-as="course">
-                                    <tr>  
-                                        <td><a t-attf-href="/course/data/{{ course.id }}" t-esc="course.name"/></td>
-                                        <td><t t-esc="course.title"/></td>
-                                        <td><t t-esc="course.name_responsible"/></td>
-                                        <td><t t-esc="course.description"/></td>
-                                    </tr>
-                                </t>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table-striped table">  
+                            <thead style="font-size: 23px;">            
+                                <tr>                   
+                                    <h6>             
+                                        <b>              
+                                            <th>Name Course</th>            
+                                            <th>Title</th>                          
+                                            <th>Responsible</th>                           
+                                            <th><b>Description</b></th>                      
+                                        </b>              
+                                    </h6>       
+                                </tr>         
+                            </thead>         
+                                <tbody>                
+                                    <t t-foreach="courses" t-as="course">
+                                        <tr>  
+                                            <td><a t-attf-href="/course/data/{{ course.id }}" t-esc="course.name"/></td>
+                                            <td><t t-esc="course.title"/></td>
+                                            <td><t t-esc="course.name_responsible"/></td>
+                                            <td><t t-esc="course.description"/></td>
+                                        </tr>
+                                    </t>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </t>
     </template>
 
     <!-- TEMPLATE MODIFICADA DE MOSTRAR LA INFO DE LOS CURSOS -->
-    <template id="plus_course" name="Courses Info" customize_show="True">  
+    <template id="plus_course" name="Course">  
         <t t-call="website.layout">
             <div class="oe_structure oe_empty">  
                 <div class="container">
@@ -170,93 +172,8 @@
                             </div>
 
                             <!--  -->
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h4 class="card-title">Have questions?</h4>
-                                    <div class="oe_structure oe_empty" data-editor-message="ARRASTRE BLOQUES AQUÍ">
-                                    <section class="s_website_form pt16 pb16 o_colored_level" data-vcss="001" data-snippet="s_website_form" data-name="Form">
-                                        <div class="container">
-                                        <form action="/website_form/" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-success-mode="redirect" data-success-page="/contactus-thank-you" data-model_name="crm.lead">
-                                            <div class="s_website_form_rows row s_col_no_bgcolor">
-                                            <div class="form-group s_website_form_field col-12  s_website_form_required  " data-type="char" data-name="Field">
-                                                <div class="row s_col_no_resize s_col_no_bgcolor">
-                                                <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="oiitopxsq3fo">
-                                                    <span class="s_website_form_label_content">Your Name</span>
-                                                    <span class="s_website_form_mark"> *</span>
-                                                </label>
-                                                <div class="col-sm">
-                                                    <input type="text" class="form-control s_website_form_input" name="contact_name" required="1" id="oiitopxsq3fo"/>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group s_website_form_field col-12  s_website_form_required  " data-type="email" data-name="Field">
-                                                <div class="row s_col_no_resize s_col_no_bgcolor">
-                                                <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="o76n3qdaizg">
-                                                    <span class="s_website_form_label_content">Your Email</span>
-                                                    <span class="s_website_form_mark"> *</span>
-                                                </label>
-                                                <div class="col-sm">
-                                                    <input type="email" class="form-control s_website_form_input" name="email_from" required="1" id="o76n3qdaizg"/>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group s_website_form_field col-12  s_website_form_model_required  " data-type="char" data-name="Field">
-                                                <div class="row s_col_no_resize s_col_no_bgcolor">
-                                                <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="ovmq5n2fsz29">
-                                                    <span class="s_website_form_label_content">Subject</span>
-                                                    <span class="s_website_form_mark"> *</span>
-                                                </label>
-                                                <div class="col-sm">
-                                                    <input type="text" class="form-control s_website_form_input" name="name" required="true" id="ovmq5n2fsz29"/>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group s_website_form_field col-12  s_website_form_required  " data-type="text" data-name="Field">
-                                                <div class="row s_col_no_resize s_col_no_bgcolor">
-                                                <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="obttkzxhdodf">
-                                                    <span class="s_website_form_label_content">Your Question</span>
-                                                    <span class="s_website_form_mark"> *</span>
-                                                </label>
-                                                <div class="col-sm">
-                                                    <textarea class="form-control s_website_form_input" name="description" required="1" id="obttkzxhdodf" rows="3"/>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group s_website_form_field col-12    " data-type="boolean" data-name="Field">
-                                                <div class="row s_col_no_resize s_col_no_bgcolor">
-                                                <label class=" col-sm-auto s_website_form_label " style="width: 200px" for="ow6fapmrgygs">
-                                                    <span class="s_website_form_label_content">Receive emails</span>
-                                                </label>
-                                                <div class="col-sm">
-                                                    <input type="checkbox" value="Yes" class="s_website_form_input" name="active" id="ow6fapmrgygs"/>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group s_website_form_field col-12   s_website_form_field_hidden " data-type="many2one" data-name="Field">
-                                                <div class="row s_col_no_resize s_col_no_bgcolor">
-                                                <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="on5rln3y0q2a">
-                                                    <span class="s_website_form_label_content">Course</span>
-                                                </label>
-                                                <div class="col-sm">
-                                                    <select class="form-control s_website_form_input" name="course_id" id="on5rln3y0q2a">
-                                                        <option t-attf-value="{{ courses.id }}">
-                                                            <t t-esc="courses.name"/>
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-12 s_website_form_submit" data-name="Submit Button">
-                                                <div style="width: 200px;" class="s_website_form_label"/>
-                                                <a href="#" role="button" class="btn btn-primary btn-lg s_website_form_send o_default_snippet_text">Enviar</a>
-                                                <span id="s_website_form_result"/>
-                                            </div>
-                                            </div>
-                                        </form>
-                                        </div>
-                                    </section>
-                                    </div>
-                                </div>
+                            <div id="form">
+                            
                             </div>
                             <!--  -->
 
@@ -317,6 +234,101 @@
         </t>
     </template>
 
+    <!-- FORMULARIO HEREDADO PARA EL SWITCH -->
+    <template id="form_Courses" name="Form" inherit_id="plus_course" customize_show="True">
+        <xpath expr="//div[@id='form']" position="inside">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Have questions?</h4>
+            <div class="oe_structure oe_empty" data-editor-message="ARRASTRE BLOQUES AQUÍ">
+            <section class="s_website_form pt16 pb16 o_colored_level" data-vcss="001" data-snippet="s_website_form" data-name="Form">
+                <div class="container">
+                <form action="/website_form/" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-success-mode="redirect" data-success-page="/contactus-thank-you" data-model_name="crm.lead">
+                    <div class="s_website_form_rows row s_col_no_bgcolor">
+                    <div class="form-group s_website_form_field col-12  s_website_form_required  " data-type="char" data-name="Field">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="oiitopxsq3fo">
+                            <span class="s_website_form_label_content">Your Name</span>
+                            <span class="s_website_form_mark"> *</span>
+                        </label>
+                        <div class="col-sm">
+                            <input type="text" class="form-control s_website_form_input" name="contact_name" required="1" id="oiitopxsq3fo"/>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group s_website_form_field col-12  s_website_form_required  " data-type="email" data-name="Field">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                        <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="o76n3qdaizg">
+                            <span class="s_website_form_label_content">Your Email</span>
+                            <span class="s_website_form_mark"> *</span>
+                        </label>
+                        <div class="col-sm">
+                            <input type="email" class="form-control s_website_form_input" name="email_from" required="1" id="o76n3qdaizg"/>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group s_website_form_field col-12  s_website_form_model_required  " data-type="char" data-name="Field">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                        <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="ovmq5n2fsz29">
+                            <span class="s_website_form_label_content">Subject</span>
+                            <span class="s_website_form_mark"> *</span>
+                        </label>
+                        <div class="col-sm">
+                            <input type="text" class="form-control s_website_form_input" name="name" required="true" id="ovmq5n2fsz29"/>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group s_website_form_field col-12  s_website_form_required  " data-type="text" data-name="Field">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                        <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="obttkzxhdodf">
+                            <span class="s_website_form_label_content">Your Question</span>
+                            <span class="s_website_form_mark"> *</span>
+                        </label>
+                        <div class="col-sm">
+                            <textarea class="form-control s_website_form_input" name="description" required="1" id="obttkzxhdodf" rows="3"/>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group s_website_form_field col-12    " data-type="boolean" data-name="Field">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                        <label class=" col-sm-auto s_website_form_label " style="width: 200px" for="ow6fapmrgygs">
+                            <span class="s_website_form_label_content">Receive emails</span>
+                        </label>
+                        <div class="col-sm">
+                            <input type="checkbox" value="Yes" class="s_website_form_input" name="active" id="ow6fapmrgygs"/>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group s_website_form_field col-12 s_website_form_field_hidden" data-type="many2one" data-name="Field" invisible="1">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                        <label class="col-form-label col-sm-auto s_website_form_label " style="width: 200px" for="on5rln3y0q2a">
+                            <span class="s_website_form_label_content">Course</span>
+                        </label>
+                        <div class="col-sm">
+                            <select class="form-control s_website_form_input" name="course_id" id="on5rln3y0q2a">
+                                <option t-attf-value="{{ courses.id }}">
+                                    <t t-esc="courses.name"/>
+                                </option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-12 s_website_form_submit" data-name="Submit Button">
+                        <div style="width: 200px;" class="s_website_form_label"/>
+                        <a href="#" role="button" class="btn btn-primary btn-lg s_website_form_send o_default_snippet_text">Enviar</a>
+                        <span id="s_website_form_result"/>
+                    </div>
+                    </div>
+                </form>
+                </div>
+            </section>
+            </div>
+            </div>
+            </div>
+        </xpath>
+
+    </template>
+
     <!-- TEMPLATE ATTACHMENTS -->
     <template id="all_attachmentos" name="Attachments">
         <t t-call="website.layout">
@@ -344,15 +356,23 @@
                                             <tr>                   
                                                 <h6>             
                                                     <b>              
-                                                        <th>Name Attachment</th>                           
-                                                    </b>              
+                                                        <th>Attachments</th>                           
+                                                    </b>      
+                                                    <br/>        
                                                 </h6>       
                                             </tr>         
                                         </thead>
                                         <tbody>
                                             <t t-foreach="course.attachment_ids" t-as="attachment">
                                             <tr>
+                                                <!-- 
                                                 <td><a t-if="attachment.id" t-attf-href="/web/content/{{ attachment.id }}?download=true" t-attf-download="{{ attachment.name }}"><i class="fa fa-download"/> <t t-esc="attachment.name"/></a>
+                                                </td> -->
+                                                <td>
+                                                    <a class="btn btn-secondary" t-att-href="'/web/content/%i' % attachment.id +'?download=true'" title="Download" target="_blank">
+                                                        <i class="fa fa-print"/> 
+                                                        <t t-esc="attachment.name"/>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             </t>
@@ -370,7 +390,7 @@
     <!--  TEMPLATE SESSIONS INFO -->
     <template id="course_sessions" name="Course Sessions">
         <t t-call="website.layout">
-            <div class="container">
+            <div class="container" >
                 <div>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
@@ -385,60 +405,62 @@
                     </ol>
                 </div>   
                 <h1><t t-esc="course"/></h1>
-                <table class="table table-striped">
-                    <thead>
-                    <t t-call="website.pager"/>
-                        <tr>
-                            <th>Session Name</th>
-                            <th>Instructor</th>
-                            <th>Start Date</th>
-                            <th>Finish Date</th>
-                            <th>Duration (hours)</th>
-                            <th>Localization</th>
-                            <th>Attendees</th>
-                            <th>Available Seats</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <t t-if="sessions">
-                            <t t-foreach="sessions" t-as="session">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <t t-call="website.pager"/>
+                            <tr>
+                                <th>Session Name</th>
+                                <th>Instructor</th>
+                                <th>Start Date</th>
+                                <th>Finish Date</th>
+                                <th>Duration (hours)</th>
+                                <th>Localization</th>
+                                <th>Attendees</th>
+                                <th>Available Seats</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="sessions">
+                                <t t-foreach="sessions" t-as="session">
+                                    <tr>
+                                        <td><t t-esc="session.name"/></td>
+                                        <td><t t-esc="session.instructor.name"/></td>
+                                        <td><t t-esc="session.date_start"/></td>
+                                        <td><t t-esc="session.finish_date"/></td>
+                                        <td><t t-esc="session.duration"/></td>
+                                        <td><t t-esc="session.localization"/></td>
+                                        <td>
+                                        <!--  CONTEO DE ASISTENTES -->
+                                            <t t-set="attendees_count" t-value="0"/>
+                                            <t t-foreach="session.attendees" t-as="attendee">
+                                                <t t-set="attendees_count" t-value="attendees_count + 1"/></t>
+                                            <t t-esc="attendees_count"/>
+                                        </td>
+                                        <td><t t-esc="session.max_seats - session.attendees_count"/></td>
+                                        <t t-if="userid not in [attendee.id for attendee in session.attendees]">
+                                            <td>
+                                                <a t-attf-href="/add_user_to_session/{{ session.id }}"><button class="btn btn-primary">Asist</button></a>
+                                            </td>
+                                        </t>
+                                        <t t-else="">
+                                            <td>
+                                                <a t-attf-href="/delete_user_to_session/{{ session.id }}">
+                                                    <button class="btn btn-primary" style="background-color: red !important;">Un-Asist</button>
+                                                </a>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </t>
+                            <t t-else="">
                                 <tr>
-                                    <td><t t-esc="session.name"/></td>
-                                    <td><t t-esc="session.instructor.name"/></td>
-                                    <td><t t-esc="session.date_start"/></td>
-                                    <td><t t-esc="session.finish_date"/></td>
-                                    <td><t t-esc="session.duration"/></td>
-                                    <td><t t-esc="session.localization"/></td>
-                                    <td>
-                                    <!--  CONTEO DE ASISTENTES -->
-                                        <t t-set="attendees_count" t-value="0"/>
-                                        <t t-foreach="session.attendees" t-as="attendee">
-                                            <t t-set="attendees_count" t-value="attendees_count + 1"/></t>
-                                        <t t-esc="attendees_count"/>
-                                    </td>
-                                    <td><t t-esc="session.max_seats - session.attendees_count"/></td>
-                                    <t t-if="userid not in [attendee.id for attendee in session.attendees]">
-                                        <td>
-                                            <a t-attf-href="/add_user_to_session/{{ session.id }}"><button class="btn btn-primary">Asist</button></a>
-                                        </td>
-                                    </t>
-                                    <t t-else="">
-                                        <td>
-                                            <a t-attf-href="/delete_user_to_session/{{ session.id }}">
-                                                <button class="btn btn-primary" style="background-color: red !important;">Un-Asist</button>
-                                            </a>
-                                        </td>
-                                    </t>
+                                    <td colspan="8">No sessions found</td>
                                 </tr>
                             </t>
-                        </t>
-                        <t t-else="">
-                            <tr>
-                                <td colspan="8">No sessions found</td>
-                            </tr>
-                        </t>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </t>
     </template>
