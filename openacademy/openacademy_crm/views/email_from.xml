@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <record id="email_template_confirmationC" model="mail.template">
+            <field name="name">Question Submitted Succesfully </field>
+            <field name="subject">Question Submitted Succesfully - ${object.contact_name}</field>
+            <field name="email_from">${object.company_id.email}</field>
+            <field name="email_to">${object.email_from}</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html">
+                <![CDATA[
+                    <div style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.5; color: #333;">
+                        <p>Dear ${object.contact_name},</p>
+                        <p>Thank you for your interest in our ${object.course_id.name} course. We have received your inquiry and will review it as soon as possible. Please note that our team may require additional time to provide you with a response, but we will do our best to get back to you as soon as we can.</p>
+                        <p>In the meantime, feel free to contact us with any questions or concerns you may have.</p>
+                        <br>
+                        <p>Best regards,</p>
+                        <p>The OpenAcademy Team</p>
+                    </div>
+                    <div style="font-size: 14px; color: #666; line-height: 1.2; margin-top: 20px;">
+                        <p>Phone: ${object.company_id.phone}</p>
+                        <p>Email: ${object.company_id.email}</p>
+                    </div>
+                ]]>
+            </field>
+
+        </record>
+    </data>
+</odoo>

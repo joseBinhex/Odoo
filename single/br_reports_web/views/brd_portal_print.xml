@@ -1,0 +1,14 @@
+<odoo>
+
+  <template id="portal_br_page" inherit_id="business_requirement.portal_br_page">
+      <xpath expr="//t[@t-set='card_header']/div/div[2]" position="before">
+          <span class="float-right ml8">
+            <a class="btn btn-secondary btn-block o_download_btn" 
+              t-attf-href="/my/business_requirement/print/{{ br.id }}"
+              title="Download">
+            <i class="fa fa-download"/> Download</a>
+          </span>
+      </xpath>
+  </template>
+
+</odoo>

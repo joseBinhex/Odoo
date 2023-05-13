@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+
+      <record model="openacademy.course">
+        <field name="name">Course 0</field>
+        <field name="title">Title 0</field>
+        <field name="description">Description 0</field>
+      </record>
+
+      <record model="openacademy.course">
+        <field name="name">Course 1</field>
+        <field name="title">Title 1</field>
+        <field name="description">Description 1</field>
+      </record>
+
+
+    </data>
+</odoo>

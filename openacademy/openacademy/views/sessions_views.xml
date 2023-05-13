@@ -1,0 +1,79 @@
+<odoo>
+    <data>
+
+        <!-- DEFINITION LIST VIEW  SESSIONS-->
+        <record model="ir.ui.view" id="sessions_list">
+            <field name="name">Sessions list</field>
+            <field name="model">openacademy.sessions</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="duration&lt;5" decoration-danger="duration>15" >
+                    <field name="name"/>
+                    <field name="duration" widget="float_time"/>
+                    <field name="number_seats"/>
+                    <field name="instructor" />
+                    <field name="course_name"/>
+                    <field name="attendees"/>
+                    <field name="taken_seats" widget='progressbar'/>
+                    <field name="date_start"></field>
+                    <field name="finish_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- SESSIONS FORM -->
+        <record model="ir.ui.view" id="sessions_form">
+            <field name="name">Sessions Form</field>
+            <field name="model">openacademy.sessions</field>
+            <field name="arch" type="xml">
+                <form string="Sessions Form">
+                <group>
+                <group>
+                    <field name="name" style="font-size:13pt">Name</field>
+                    <field name="duration" style="font-size:13pt" widget="float_time">Duration</field>
+                    <field name="instructor" style="font-size:13pt"/>
+                    <field name="course_name" style="font-size:13pt">Course</field>
+                    <field name="date_start"></field>
+                    <field name="finish_date"></field>
+                </group>
+
+                <group>
+                    <field name="localization" style="font-size:13pt">Localization</field>
+                    <field name="attendees_count" style="font-size:13pt">Number Seats</field>
+                    <field name="max_seats" style="font-size:13pt">Course</field>
+                    <field name="taken_seats" style="font-size:13pt" widget='progressbar'/>
+                </group>
+                <notebook>
+                    <page name="Attendees" string="Attendees">
+                    <field name="attendees" style="font-size:13pt" string="Attendees" widget="many2many_tags">Course</field> 
+                    </page>
+                </notebook>
+                    
+                </group>
+                </form>
+            </field>
+        </record>
+        
+        <!-- SEARCH VIEW  -->
+        <record model="ir.ui.view" id="sessions_search">
+            <field name="name">Sessions Search</field>
+            <field name="model">openacademy.sessions</field>
+            <field name="arch" type="xml">
+                <search>
+                <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- ACTION SESSIONS -->
+
+        <record model="ir.actions.act_window" id="action_list_sessions">
+            <field name="name">Sessions</field>
+            <field name="res_model">openacademy.sessions</field>
+            <field name="view_mode">tree,kanban,form,calendar,gantt,graph</field>
+        </record>
+
+        <menuitem id="menu_sessions" parent="openacademy.menu_root" name="Sessions" sequence="10"
+                action="action_list_sessions"/>
+
+    </data>
+</odoo>

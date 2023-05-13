@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--  EXTERNAL LAYOUT WITH BUSINESS INFORMATION -->
+    <template id="actual_external_layout">
+
+        <t t-if="not o" t-set="o" t-value="doc"></t>
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"></t>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"></t>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+        </t>
+        
+        <!-- Start of the header blue-->
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="fondo" style="background-color: #2774fc;
+                            position: absolute;
+                            left: 0;
+                            top: -10;
+                            width: 100%;
+                            height: 50px;
+                            z-index: 2;"></div>
+        </div>
+
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <!-- take info from doc -->
+            <t t-raw="0"/>
+        </div>
+
+        <!-- footer blue -->
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="fondo" style="background-color: #2774fc;
+                            position: absolute;
+                            left: 0;
+                            top: -10;
+                            width: 100%;
+                            height: 50px;
+                            z-index: 2;"></div>
+        </div>
+        
+    </template>
+
+    <!-- HEADER LAYOUT WITH ESSENCIAL INFORMATION -->
+    <template id="actual_layout_br_report_header">
+    <t t-if="not o" t-set="o" t-value="doc"></t>
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"></t>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"></t>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+        </t>
+        <div style="page-break-after: always; display: flex; align-items: center; padding-left: 50px;">
+        
+            <div style="padding-top:50px; padding-left: 15px;">
+                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 280px;" alt="Logo"/>
+            </div>
+
+            <h3 style="padding-top:80px; padding-bottom:15px;">
+                <div style="font-family: 'Poppins', sans-serif; letter-spacing: 3px; padding-left:5px;">BUSINESS REQUIREMENTS</div>
+            </h3>
+            <h1 style="font-family: 'Poppins', sans-serif;
+                        font-weight: bold;
+                        font-size: 60px;
+                        text-transform: uppercase;">
+
+                <!-- <span t-field="o.name" /> -  -->
+                <span class="pt-60" t-field="o.description" />
+            </h1>
+
+            <!--  BLUE LANE -->
+            <div t-if="company.logo or company.report_header" style="padding-top:80px;">
+                <div style="width: 28%;">
+                    <div style="border-bottom: 5px solid #2774fc;" />
+                </div>
+            </div>
+
+            <div t-if="company.website" style="font-family: 'Poppins', sans-serif; 
+                                                font-weight: 100;
+                                                text-transform: uppercase; 
+                                                font-size: 25px; 
+                                                letter-spacing: 1px;
+                                                padding-top:100px;">
+                <t t-set="website" t-value="company.website.split('://')[1] if '://' in company.website else company.website"/>
+                <t t-esc="website"/>
+            </div>
+
+            <div style="padding-top:200px">
+                <div style=" float: left;">
+                    <h3 style="font-family: 'Poppins', sans-serif; font-weight: bold;">Stakeholder: </h3>
+                    <div style="font-family: 'Poppins', sans-serif; width:70%;font-size:25px;"> 
+                        <span t-field="o.partner_id.name"/>
+                    </div>
+                </div>
+
+                <div style="float: right; ">
+                    <h3 style="font-family: 'Poppins', sans-serif; font-weight: bold;">Company Details: </h3>
+                    <div style="font-family: 'Poppins', sans-serif; width:70%;font-size:25px;"> 
+                        <span t-field="company.street"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </template>
+
+
+    <!--TEMPLATE OF BODY REPORT -->
+    <template id="actual_layout_br_report_bod">
+    <xpath expr="//head" position="inside">
+        <link rel="stylesheet" type="text/css" href="/br_reports/static/css/actual.css"/>
+    </xpath>
+
+    <div
+        t-if="o.business_requirement and o.business_requirement != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'"
+        style="page-break-inside: avoid;"> 
+
+        <div class="container-info">
+            <div class="mini-title">Stakeholder Story:</div>
+
+                <div class="lane-div">
+                    <div class="lane"/>
+                </div>
+
+            <div class="text">
+                <span t-field="o.business_requirement" />
+            </div>
+        </div>
+    </div>
+
+    <div
+        t-if="o.scenario and o.scenario != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'"
+        style="page-break-inside: avoid;">
+        <div class="container-info">
+            <div class="mini-title">Scenario:</div>
+
+                <div class="lane-div">
+                    <div class="lane"/>
+                </div>
+
+            <div class="text">
+                <span t-field="o.scenario" />
+            </div>
+        </div>
+    </div>
+
+    <div
+        t-if="o.gap and o.gap != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'"
+        style="page-break-inside: avoid;">
+        <div class="container-info">
+            <div class="mini-title">Gap:</div>
+
+                <div class="lane-div">
+                    <div class="lane"/>
+                </div>
+
+            <div class="text">
+                <span t-field="o.gap" />
+            </div>
+        </div>
+    </div>
+
+    <div
+        t-if="o.test_case and o.test_case != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'"
+        style="page-break-inside: avoid;">
+        <div class="container-info">
+            <div class="mini-title">Test Case:</div>
+
+                <div class="lane-div">
+                    <div class="lane"/>
+                </div>
+
+            <div class="text">
+                <span t-field="o.test_case" />
+            </div>
+        </div>
+    </div>
+
+    <div
+        t-if="o.terms_and_conditions and o.terms_and_conditions != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'"
+        style="page-break-inside: avoid;">
+        <div class="container-info">
+            <div class="mini-title">Terms and Conditions:</div>
+
+                <div class="lane-div">
+                    <div class="lane"/>
+                </div>
+
+            <div class="text">
+                <span t-field="o.terms_and_conditions" />
+            </div>
+        </div>
+    </div>
+    
+    </template>
+
+    <!-- template for project team -->
+    <template id="actual_project_team" name="project_team">
+        <div style="page-break-before: always;" >
+            <xpath expr="//head" position="inside">
+                <link rel="stylesheet" type="text/css" href="/br_reports/static/css/actual.css"/>
+            </xpath>
+
+            <div class="title">
+
+            Project Team</div>
+            <div class="sub-title">
+                GREAT TEAMWORK
+            </div>
+            <div class="lane-div-t">
+                <div class="lane-t"/>
+            </div>
+
+                <!--  TABLE WITH RESPONSIBLE AND CREATOR  -->
+            <div class="table-container">
+                <table class="team-table">
+                    <thead>
+                        <tr>
+                            <td>
+                                <div class="img" t-field="o.responsible_user_id.image_1920" t-options='{"widget": "image"}'/>
+                            </td>
+                            <td class="info">
+                                <div class="responsible-t">
+                                    <t t-if="o.responsible_user_id.id == o.create_uid.id">
+                                        Responsible &amp; Creator
+                                    </t>
+                                    <t t-if="o.responsible_user_id.id != o.create_uid.id">
+                                        Responsible
+                                    </t>
+                                </div>
+                                <div>
+                                    <span t-field="o.responsible_user_id.name"/>
+                                </div>
+                                <div>
+                                    <span t-field="o.responsible_user_id.email"/>
+                                </div>
+                                <div>
+                                    <a href="#" class="about-team">
+                                        ABOUT TEAM
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <br/>
+                    </thead>
+                    
+                    <tbody>
+                        <t t-if="o.responsible_user_id.id != o.create_uid.id">
+                            <tr>    
+                                <td>
+                                    <div class="img" t-field="o.create_uid.image_1920" t-options='{"widget": "image"}'/>
+                                </td>
+                                <td class="info">
+                                    <div class="responsible-t">
+                                        Created by
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <span t-field="o.create_uid.name"/>
+                                        </div>
+                                        <div>
+                                            <span t-field="o.create_uid.email"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href="#" class="about-team">
+                                            ABOUT TEAM
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>   
+            </div>
+
+
+        </div>
+    </template>
+
+    <template id="actual_deliverable_br_report_body">
+    <div t-if="any(o.deliverable_lines)" style="page-break-before: always;">
+        <div>
+            <link rel="stylesheet" type="text/css" href="/br_reports/static/css/actual.css"/>
+            <div class="title-d">
+                Section
+            </div>
+            
+            <div class="lane-div-d">
+                <div class="lane-d"/>
+            </div>
+            <div class="title-d">
+                Business Requirements
+            </div>
+        </div>
+
+        <!-- check deliverable first page -->
+        <div t-set="first_deliverable" t-value="True"></div>
+        <t t-foreach="o.deliverable_lines.sorted(key=lambda b: b.sequence)" t-as="deliverable">
+            <div t-if="not first_deliverable" style="page-break-after: always; ">
+                <div style="page-break-before: always; margin-left:15px;">
+                    <div style="width: 80%;">
+
+                        <div style="margin-top:40px; margin-left:60px; font-size: 34px;
+                                    font-weight: bold;
+                                    color: #22263E;
+                                    margin-bottom: 15px;
+                                    text-transform: uppercase;
+                                    font-family: 'Poppins', sans-serif;">User Case</div>
+                        <table style="width: 100%;
+                                    font-size:16px;
+                                    font-family: 'Poppins', sans-serif;
+                                    margin-left:60px">
+                            <tr>
+                                <td style="padding-right:25px;">
+                                    <span class="fas fa-users" style="color: #2774fc; font-size:150px; padding-right:25px;"></span>
+                                </td>
+                                <td style="vertical-align: top; horizontal-align: left; font-size:22px;" >
+                                    <span t-field="deliverable.user_case"/>
+                                </td>
+                            </tr>
+                        </table>   
+
+                        <div style="margin-top:40px; margin-left:60px; font-size: 34px;
+                                    font-weight: bold;
+                                    color: #22263E;
+                                    margin-bottom: 15px;
+                                    text-transform: uppercase;
+                                    font-family: 'Poppins', sans-serif;">Deliverable items:</div>
+
+                        <table style="width: 100%;
+                                    font-size:16px;
+                                    font-family: 'Poppins', sans-serif;
+                                    margin-left:60px;">
+                            <tr>
+                                <td style="padding-right:25px;">
+                                    <span class="fas fa-cogs" style="color: #2774fc; font-size:150px; padding-right:25px;"></span>
+                                </td>
+                                <td style="vertical-align: top; text-align: left; font-size:22px;" >
+                                    <span t-field="deliverable.proposed_solution" />
+                                </td>
+                            </tr>
+                        </table> 
+
+                    </div>
+                    <!-- START MONETARY DIVS -->
+                    <div class="row">
+                        <div class="text-left col-md-12 font-weight:bold;" style="margin-left:60px; margin-top:20px;"
+                            >
+                            <h4 style="margin-left:60px; font-weight: 700;
+                            color: #22263E;
+                            font-size: 35px;
+                            font-family: 'Poppins', sans-serif;">IMPORT: <span
+                                t-field="deliverable.price_total"
+                                t-options='{"widget": "monetary", "display_currency": deliverable.currency_id}'/>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div style="page-break-before: always;">
+                        <t t-set="section_totals" t-value="o.get_total_by_section()" />
+                        <div>
+                            <link rel="stylesheet" type="text/css" href="/br_reports/static/css/actual.css"/>
+                            <div class="title-d" style="margin-left:60px">
+                                Subtotals
+                            </div>
+                            
+                            <div class="lane-div-d">
+                                <div class="lane-d"/>
+                            </div>
+                        </div>
+                        <t t-set="section_totals" t-value="o.get_total_by_section()" />
+                        <t t-foreach="section_totals" t-as="section_total">
+                            <h3 class="text-left" style="margin-left:60px"><t t-esc="section_total[0]" />:  <span
+                                t-esc="section_total[1]"
+                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </h3>
+                        </t>
+                    </div>
+
+                </div>
+            </div>
+
+            <div t-if="first_deliverable">
+                <div style="margin-left:15px">
+                    <div style="width: 80%;">
+                        <div style="margin-top:40px; margin-left:60px; font-size: 34px;
+                                    font-weight: bold;
+                                    color: #22263E;
+                                    text-transform: uppercase;
+                                    margin-bottom: 15px;
+                                    font-family: 'Poppins', sans-serif;">User Case</div>
+                        <table style="width: 100%;
+                                    font-size:16px;
+                                    font-family: 'Poppins', sans-serif;
+                                    margin-left:60px">
+                            <tr>
+                                <td style="padding-right:25px;">
+                                    <span class="fas fa-users" style="color: #2774fc; font-size:150px; padding-right:25px;"></span>
+                                </td>
+                                <td style="vertical-align: top; horizontal-align: left; font-size:22px;" >
+                                    <span t-field="deliverable.user_case"/>
+                                </td>
+                            </tr>
+                        </table>  
+
+                        <div style="margin-top:40px; margin-left:60px; font-size: 34px;
+                                    font-weight: bold;
+                                    color: #22263E;
+                                    text-transform: uppercase;
+                                    margin-bottom: 15px;
+                                    font-family: 'Poppins', sans-serif;">Deliverable items:</div>
+
+                        <table style="width: 100%;
+                                    font-size:16px;
+                                    font-family: 'Poppins', sans-serif;
+                                    margin-left:60px;">
+                            <tr>
+                                <td style="padding-right:25px;">
+                                    <span class="fas fa-cogs" style="color: #2774fc; font-size:150px; padding-right:25px;"></span>
+                                </td>
+                                <td style="vertical-align: top; text-align: left; font-size:22px;" >
+                                    <span t-field="deliverable.proposed_solution" />
+                                </td>
+                            </tr>
+                        </table> 
+
+                    </div>
+                    <div class="row">
+                        <div class="text-left col-md-12 font-weight:bold;" style="margin-left:60px; margin-top:20px;">
+                            <h4 style="margin-left:60px; font-weight: 700;
+                            color: #22263E;
+                            font-size: 35px;
+                            font-family: 'Poppins', sans-serif;">IMPORT: <span
+                                t-field="deliverable.price_total"
+                                t-options='{"widget": "monetary", "display_currency": deliverable.currency_id}'/>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div t-set="first_deliverable" t-value="False"></div>
+            </div>
+        </t>
+    </div>
+
+    </template>
+
+    <!--  FORMAT OF THE STRUCTURE  -->
+    <template id="actual_layout_br_reportt">
+        <t t-set="o" t-value="o.with_context(lang=lang)" />
+        <t t-call="br_reports.actual_layout_br_report_header" />
+        <t t-call="br_reports.actual_layout_br_report_bod" />
+        <t t-call="br_reports.actual_project_team" />
+        <t t-call="br_reports.actual_deliverable_br_report_body" />
+    </template>
+
+    <!-- FINAL CALL FOR ALL TEMPLATES AND IMG/TITLE HEADER -->
+    <template id="br_actual_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="br_reports.actual_external_layout">
+                    <t t-set="lang" t-value="o.partner_id.lang" />
+                    <div class="page"> 
+                        <div class="pt-3"/>
+                        <t
+                            t-call="br_reports.actual_layout_br_reportt"
+                            t-lang="lang"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    
+</odoo>

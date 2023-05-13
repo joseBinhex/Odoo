@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="business_actual_requirement_report" model="ir.actions.report">
+            <field name="name">Actual Business Requirement</field>
+            <field name="model">business.requirement</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">br_reports.br_actual_report</field>    
+            <field name="report_file">br_reports.br_actual_report</field>       
+            <field name="print_report_name">(object.name)</field> 
+            <field name="paperformat_id" ref="br_reports.br_customformat" />
+        </record>
+    </data>
+</odoo>

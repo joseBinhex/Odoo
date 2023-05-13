@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="opportunities_kanban_custom" model="ir.ui.view">
+        <field name="name">opportunities_kanban_custom</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by='course_id' class="o_kanban_mobile" create="false">
+                <field name="contact_name"/>
+                <field name="email_from"/>
+                <field name="description"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_record_header">
+                                    <h3 class="o_kanban_record_title"><span class="fa fa-user-circle-o"/>  <field name="contact_name"/></h3>
+                                    <div class="o_kanban_record_subtitle">
+                                        <span class="fa fa-envelope-o"/>  
+                                        <span><field name="email_from"/></span>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_content">
+                                    <ul>
+                                        <li><strong>Subject: </strong></li>
+                                        <li><field name="description"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+
+            </kanban>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>
+  

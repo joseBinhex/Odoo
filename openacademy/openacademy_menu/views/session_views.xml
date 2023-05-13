@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- kanban view with only attendees on it -->
+    <record id="session_kanban_custom" model="ir.ui.view">
+    <field name="name">session_kanban_custom</field>
+    <field name="model">openacademy.sessions</field>
+    <field name="arch" type="xml">
+        <kanban default_group_by='name'>
+            <field name="attendees"/>
+            <field name="id"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click">
+                        <div class="o_kanban_record">
+                            
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <h3>Attendees:</h3>
+                                </strong>
+                                <div class="o_kanban_tags_section">
+                                    <ul>
+                                        <li>
+                                        <field name="id" invisible="1"/></li>
+                                        <li style="font-size: 16px;">
+                                            <field name="attendees"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+        </field>
+    </record>
+
+    <!-- Wizard for join to any session  -->
+    <record id="view_add_attendee_wizards" model="ir.ui.view">
+        <field name="name">Add Attendee Wizard</field>
+        <field name="model">openacademy.joinses</field>
+        <field name="arch" type="xml">
+            <form>
+                <h1>Wanna join to the actual session?</h1>
+                <group>
+                    <field name="is_attendee" invisible="1" options='{"always_reload": True}'></field>
+                    <field name="sesion_name" widget="many2many_tags" readonly="1"/>
+                    <field name="partners_name" widget="many2many_tags" readonly="1"/>
+                </group>
+                <footer>
+                    <button name='unsubscribe' type='object' string="Unsubscribe" attrs="{'invisible': [('is_attendee', '=', False)]}" />
+                    <button name='subscribe' type='object' string='Subscribe' attrs="{'invisible': [('is_attendee', '=', True)]}" /><t/> or <t/>
+                    <button special='cancel' string='Cancel' />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    </data>
+</odoo>
+  

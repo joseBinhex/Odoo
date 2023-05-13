@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+        <!-- Principal category -->
+        <record id="module_category_openacademy_app" model="ir.module.category">
+            <field name="name">Open Academy APP</field>
+            <field name="description">User's category for Open Academy APP</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="module_category_openacademy_app_s" model="ir.module.category">
+            <field name="name">Open Academy APP</field>
+            <field name="parent_id" ref="openacademy_menu.module_category_openacademy_app"></field>
+            <field name="description">User's category for Open Academy APP</field>
+        </record>
+        
+        <!-- MANAGER USER GROUP-->
+        <record id="openacademy_app_manager" model="res.groups">
+            <field name="name">OpenAcademy APP / Manager</field>
+            <field
+                name="category_id"
+                ref="module_category_openacademy_app_s"
+            />
+            <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <!-- MANAGER USER GROUP-->
+        <record id="openacademy_app_user" model="res.groups">
+            <field name="name">OpenAcademy APP / User</field>
+            <field
+                name="category_id"
+                ref="module_category_openacademy_app_s"
+            />
+            <field name="implied_ids" eval="[(4, ref('openacademy_menu.openacademy_app_manager'))]"></field>
+        </record>
+
+
+</odoo>

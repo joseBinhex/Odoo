@@ -1,0 +1,36 @@
+<odoo>
+
+    <record id="report_sessions" model="ir.actions.report">
+        <field name="name">Report</field>
+        <field name="model">openacademy.sessions</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">openacademy.report_session</field>
+        <field name="report_file">openacademy.report_session</field>
+        <field name="binding_model_id" ref="model_openacademy_sessions"></field>
+        <field name="binding_type">report</field>
+    </record>   
+
+    <template id="report_session">
+
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2 t-field="doc.name"></h2>
+                            <p>From <span t-field="doc.date_start"/> to <span t-field="doc.finish_date"/></p>
+                            <h3>Attendees: </h3>
+                            <ul>
+                                <t t-foreach="doc.attendees" t-as="attendee">
+                                    <li>
+                                        <span t-field="attendee.name"/>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </t>
+                </t>
+            </t>
+
+    </template> 
+
+</odoo>

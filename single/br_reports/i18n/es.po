@@ -1,0 +1,108 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* br_reports
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0-20230313\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-27 13:36+0000\n"
+"PO-Revision-Date: 2023-04-27 14:41+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_header
+msgid "<strong>Approval Date</strong>"
+msgstr "<strong>Fecha Aprobación</strong>"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_header
+msgid "<strong>Change Request</strong>"
+msgstr "<strong>Petición de Cambio</strong>"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_header
+msgid "<strong>Confirmation Date</strong>"
+msgstr "<strong>Fecha de confirmación</strong>"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_header
+msgid "<strong>Date</strong>"
+msgstr "<strong>Fecha</strong>"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_header
+msgid "<strong>Responsible</strong>"
+msgstr "<strong>Responsable</strong>"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_header
+msgid "<strong>Source</strong>"
+msgstr "<strong>Mejora</strong>"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_header
+msgid "<strong>Stakeholder</strong>"
+msgstr "<strong>Cliente</strong>"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_body
+msgid "Amount:"
+msgstr "Cantidad"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_body
+msgid "Deliverable items:"
+msgstr "Objetos repartibles:"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_bod
+msgid "Gap:"
+msgstr "Extra"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_header
+msgid "No"
+msgstr "No"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_body
+msgid "Proposed Solution"
+msgstr "Solución propuesta"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_bod
+msgid "Scenario:"
+msgstr "Historia:"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_bod
+msgid "Stakeholder Story:"
+msgstr "Historia Cliente:"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_body
+msgid "Subtotals"
+msgstr "Subtotal"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_bod
+msgid "Terms and Conditions:"
+msgstr "Termino y condiciones:"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_bod
+msgid "Test Case:"
+msgstr "Caso de Test:"
+
+#. module: br_reports
+#: model_terms:ir.ui.view,arch_db:br_reports.new_layout_br_report_body
+msgid "User Case"
+msgstr "Caso de usuario:"

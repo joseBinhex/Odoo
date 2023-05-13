@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap');
+
+.container-info {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.mini-title {
+    font-size: 38px;
+    font-weight: bold;
+    color: #22263E;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 150px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+
+}
+
+.container-info .text{
+    font-size:20px;
+    color: #22263E;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    margin-left: 150px;
+    margin-right: 150px;
+    text-justify: auto;
+
+}
+.lane-div {
+    width: 28%; 
+    padding-left: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.lane-div .lane {
+    border-bottom: 5px solid #2774fc;
+}
+
+.lane-div-t {
+    margin-left: 41.5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.lane-div-t .lane-t {
+    border-bottom: 5px solid #2774fc;
+    width: 30%;
+}
+
+.title {
+    
+    font-size: 90px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.sub-title {
+    font-size:24px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 150;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/*  */
+
+.table-container {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.team-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0px 20px;
+}
+
+/* let space between imgs */
+.team-table td {
+    padding: 30px;
+}
+
+.img {
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+.img img {
+    width: 250px;
+    height: auto;
+    max-width: 250px; 
+    max-height: 250px; 
+}
+
+
+.info {
+    vertical-align: middle;
+}
+
+.responsible-t {
+    font-weight: bold;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px;
+}
+
+.about-team {
+    text-align: center;
+    width: 90%;
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #000;
+    color: #000;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.about-team:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+
+/* DELIVERABLES SECTION */
+
+.title-d {
+    font-weight: 700;
+    font-size: 50px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px;
+    margin-right: 40px;
+    text-align: right;
+}
+
+.lane-div-d {
+    display: flex;
+    align-items: center;
+    margin-left: 60%; 
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-right: 40px;
+}
+
+.lane-div-d .lane-d {
+    border-bottom: 5px solid #2774fc;
+    width: 80%;
+    margin-left: auto; 
+}

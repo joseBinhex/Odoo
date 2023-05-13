@@ -1,0 +1,44 @@
+ <odoo>
+ <!-- MENSAJE DE UNIDO A SESIÓN CORRECTAMENTE -->
+    <template id="register_to_session_success" name="Register to Session Success">
+        <t t-call="website.layout">    
+            <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/courses">Courses</a>
+                </li>
+            </ol>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p><t t-esc="message"/></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- MENSAJE DE BORRADO -->
+    <template id="delete_to_session_success" name="Delete to Session Success">
+        <t t-call="website.layout">
+            <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/courses">Courses</a>
+                </li>
+            </ol>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p><t t-esc="message"/></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

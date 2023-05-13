@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+  
+    <!-- Define la vista personalizada -->
+    <record id="course_list_custom" model="ir.ui.view">
+      <field name="name">course_list_custom</field>
+      <field name="model">openacademy.course</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="responsible"/>
+        </tree>
+      </field>
+    </record>
+
+  </data>
+</odoo>

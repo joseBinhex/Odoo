@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+
+    <t t-name="academy.buttons">
+        <div style="background-color: #714B67;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;">
+
+            <div style="padding: 15px; margin: 0px; ">
+            <!-- Go back button -->
+                <button class="o_openacademy_back btn btn-secondary btn-lg" style="width:70px"><i class="fa fa-arrow-left style=font-size:55px;" aria-hidden="true" ></i></button>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <img src="/openacademy_menu/static/description/icon.png" style="height:30%; width:auto;" />
+                <h1 style="color: #fff; font-size: 36px; padding:10px">Open Academy</h1>
+
+                <div style="padding: 7px;">
+                    <button class="o_openacademy_course_btn btn btn-primary btn-lg">Courses</button>
+                </div>
+
+                <div style="padding: 7px;">
+                    <button class="o_openacademy_session_btn btn btn-primary btn-lg">Sessions</button>
+                </div>
+                
+                <div style="padding: 7px;">
+                    <button class="o_openacademy_oportunities_btn btn btn-primary btn-lg">Opportunities</button>
+                </div>
+
+                <div style="padding: 7px;">
+                    <!-- DROPDOWN MENU -->
+                    <div class="dropdown">
+                        <button class="o_openacademy_sett_bt btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-cog"></i> Settings
+                        </button>
+                        <!-- OPTIONS TO ADD -->
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="o_openacademy_res_course_btn btn dropdown-item">Responsibles</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="o_menu_footer" style="background-color: #52374c; text-align: center; position:fixed; bottom:0; z-index:999999; width:100%">
+                <div class="o_company_name" style="font-size:18px; color: white;" >
+                </div>
+                
+                <div class="o_company_logo">
+                    <img style="height:50px; width:auto;"></img>
+                </div>
+            </div>
+
+        </div>
+        
+        
+    </t>
+
+</template>

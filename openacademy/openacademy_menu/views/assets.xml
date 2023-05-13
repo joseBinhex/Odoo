@@ -1,0 +1,8 @@
+<odoo>
+    <template id="assets_backend_backend_ext" inherit_id="web.assets_backend" name="Assets">
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/openacademy_menu/static/src/js/menu.js"/>
+        </xpath>
+    </template>
+
+</odoo>
